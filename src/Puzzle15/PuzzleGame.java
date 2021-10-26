@@ -30,6 +30,10 @@ public class PuzzleGame implements ActionListener {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
+    void createTiles() {
+
+    }
+
 
 
 
