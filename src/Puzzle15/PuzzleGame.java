@@ -48,6 +48,14 @@ public class PuzzleGame implements ActionListener {
         panel.add(buttons[buttons.length - 1]);
     }
 
+    void shuffleTiles() {
+        panel.removeAll();
+        for (int i = buttons.length - 1 - 1; i >= 0 ; i--) {
+            int index = (int) (Math.random() * i);
+
+        }
+    }
+
 
 
 
