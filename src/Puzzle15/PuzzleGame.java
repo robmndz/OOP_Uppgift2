@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static java.lang.Integer.parseInt;
+
 public class PuzzleGame implements ActionListener {
 
     JFrame frame;
@@ -53,25 +55,49 @@ public class PuzzleGame implements ActionListener {
         for (int i = buttons.length - 1 - 1; i >= 0 ; i--) {
             int index = (int) (Math.random() * i);
 
+            // To demonstrate uncomment index = i;
+            // index = i;
+
+            JButton temp = buttons[i];
+            buttons[i] = buttons[index];
+            buttons[index] = temp;
         }
+        for (int i = 0; i < buttons.length - 1; i++) {
+            panel.add(buttons[i]);
+        }
+        panel.validate();
+        panel.repaint();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Button New Game
+        if (e.getSource() == startButton) {
+            indexEmptyButton = 15;
+            createTiles();
+            shuffleTiles();
+        }
+        buttonPush(e);
+    }
+
+    // This method verifies that the puzzle is successfully complete
+    private boolean hasPlayerWon() {
+        boolean isInOrder = true;
+        int i = 0;
+        while(isInOrder && i < buttons.length - 1) {
+            if (!buttons[i].getText().isEmpty()) {
+                isInOrder = parseInt(buttons[i].getText()) == i + 1;
+                i++;
+            } else {
+                isInOrder = false;
+            }
+        }
+        return isInOrder;
+    }
+
+
+    // What it happens when the user press the buttons (play)
+    private void buttonPush(ActionEvent e) {
 
     }
 }
