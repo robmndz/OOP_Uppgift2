@@ -20,7 +20,7 @@ public class PuzzleGame implements ActionListener {
         panel = new JPanel();
 
         // adding all buttons to the frame & actionListener
-        startButton.add(new JButton("New Game"));   // Start button
+        startButton = new JButton("New Game");
         startButton.addActionListener(this);
 
         frame.add(startButton, BorderLayout.NORTH);
@@ -52,7 +52,7 @@ public class PuzzleGame implements ActionListener {
 
     void shuffleTiles() {
         panel.removeAll();
-        for (int i = buttons.length - 1 - 1; i >= 0 ; i--) {
+        for (int i = buttons.length - 1 - 1; i >= 0; i--) {
             int index = (int) (Math.random() * i);
 
             // To demonstrate uncomment index = i;
@@ -65,13 +65,14 @@ public class PuzzleGame implements ActionListener {
         for (int i = 0; i < buttons.length - 1; i++) {
             panel.add(buttons[i]);
         }
+
         panel.validate();
         panel.repaint();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Button New Game
+        // Boton New Game
         if (e.getSource() == startButton) {
             indexEmptyButton = 15;
             createTiles();
@@ -84,7 +85,7 @@ public class PuzzleGame implements ActionListener {
     private boolean hasPlayerWon() {
         boolean isInOrder = true;
         int i = 0;
-        while(isInOrder && i < buttons.length - 1) {
+        while (isInOrder & i < buttons.length - 1) {
             if (!buttons[i].getText().isEmpty()) {
                 isInOrder = parseInt(buttons[i].getText()) == i + 1;
                 i++;
@@ -93,6 +94,7 @@ public class PuzzleGame implements ActionListener {
             }
         }
         return isInOrder;
+
     }
 
 
@@ -118,7 +120,26 @@ public class PuzzleGame implements ActionListener {
             buttons[indexEmptyButton] = temp;
             indexEmptyButton = indexButtonPressed;
 
+            updateButton();
 
+            if (hasPlayerWon()) {
+                showWinnerMessage();
+            }
         }
+    }
+
+    private void showWinnerMessage() {
+        JOptionPane.showMessageDialog(null, "Congratulations! You win");
+    }
+
+    // This method update the change of buttons
+    private void updateButton() {
+        panel.removeAll();
+        for (int i = 0; i < buttons.length; i++) {
+            panel.add(buttons[i]);
+        }
+        panel.repaint();
+        panel.validate();
+
     }
 }
