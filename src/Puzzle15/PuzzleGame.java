@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 import static java.lang.Integer.parseInt;
 
+
+
 public class PuzzleGame implements ActionListener {
 
     JFrame frame;
@@ -32,6 +34,7 @@ public class PuzzleGame implements ActionListener {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
+
     void createTiles() {
         panel.setLayout((new GridLayout(4, 4)));
         buttons = new JButton[16];
@@ -50,6 +53,7 @@ public class PuzzleGame implements ActionListener {
         panel.add(buttons[buttons.length - 1]);
     }
 
+
     void shuffleTiles() {
         panel.removeAll();
         for (int i = buttons.length - 1 - 1; i >= 0; i--) {
@@ -65,10 +69,10 @@ public class PuzzleGame implements ActionListener {
         for (int i = 0; i < buttons.length - 1; i++) {
             panel.add(buttons[i]);
         }
-
         panel.validate();
         panel.repaint();
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -80,6 +84,7 @@ public class PuzzleGame implements ActionListener {
         }
         buttonPush(e);
     }
+
 
     // This method verifies that the puzzle is successfully complete
     private boolean hasPlayerWon() {
@@ -94,7 +99,6 @@ public class PuzzleGame implements ActionListener {
             }
         }
         return isInOrder;
-
     }
 
 
