@@ -98,6 +98,27 @@ public class PuzzleGame implements ActionListener {
 
     // What it happens when the user press the buttons (play)
     private void buttonPush(ActionEvent e) {
+        boolean foundPushedButton = true;
+        int indexButtonPressed = 0;
+        while (foundPushedButton & indexButtonPressed < buttons.length) {
+            if (e.getSource() == buttons[indexButtonPressed]) {
+                foundPushedButton = false;
+            } else {
+                indexButtonPressed++;
+            }
+        }
+        // This condition evaluates if there is a nearby blank space
+        if ((indexButtonPressed == indexEmptyButton - 4)
+                || (indexButtonPressed == indexEmptyButton + 4)
+                || (indexButtonPressed == indexEmptyButton - 1 && (indexButtonPressed + 1) % 4 != 0)
+                || (indexButtonPressed == indexEmptyButton + 1 && indexButtonPressed % 4 != 0)) {
+            // I create a temporary button where I copy the existing button
+            JButton temp = buttons[indexButtonPressed];
+            buttons[indexButtonPressed] = buttons[indexEmptyButton];
+            buttons[indexEmptyButton] = temp;
+            indexEmptyButton = indexButtonPressed;
 
+
+        }
     }
 }
